@@ -6,11 +6,12 @@ vector<int> generan_testset(int testscale)
     random_device rdnum;
     mt19937 gen(rdnum());
     uniform_int_distribution<> dis(1,10000);
-
+    //srand(time(nullptr));
     vector<int> testset(testscale);
     for(int i=0;i<testscale;i++)
     {
         testset[i]=dis(gen);
+        //testset[i]=rand() 10000 % 1;
     }
 
     return testset;
@@ -35,6 +36,7 @@ vector<int> select_sort(vector<int> testset)
             testset[i]=testset[minindex];
             testset[minindex]=tmp;*/
 
+            //con not switch with itself
             testset[i]=testset[i]^testset[minindex];
             testset[minindex]=testset[i]^testset[minindex];
             testset[i]=testset[i]^testset[minindex];
