@@ -106,7 +106,8 @@ int main(void)
         
         if(i%1000==0)
         {
-            cout <<"\r" << i << "test completed." << flush;
+            //cout <<"\r" << i << "test completed." << flush;
+            cout << i << "test completed." << endl;
         }
 
 
