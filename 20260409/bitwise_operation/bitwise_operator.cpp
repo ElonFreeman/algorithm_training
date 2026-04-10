@@ -1,18 +1,6 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-vector<int> to_bin(int num)
-{
-    vector<int> bitdigis;
-    while(num)
-    {
-        bitdigis.push_back(num%2);
-        num/=2;
-    }
-
-    return bitdigis;
-}
-
 int main(void)
 {
     int num1=7,num2=12,result;
@@ -56,8 +44,5 @@ int main(void)
     cout << "~(num1 ^ num2):" << result << endl;
     cout << "~(num1 ^ num2):" << bitset<8>(result) << endl;
 
-
-    
-    
     return 0;
 }
