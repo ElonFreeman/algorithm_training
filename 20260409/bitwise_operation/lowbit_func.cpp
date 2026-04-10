@@ -5,6 +5,7 @@ int lowbit(int num)
 {
     return num & (~num+1);
 }
+
 int main(void)
 {
     int num=32,tnum=num;
