@@ -5,7 +5,7 @@ vector<int> generan_testset(int testscale)
 {
     random_device rdnum;
     mt19937 gen(rdnum());
-    uniform_int_distribution<> dis(1,1000);
+    uniform_int_distribution<> dis(1,10000);
 
     vector<int> testset(testscale);
     for(int i=0;i<testscale;i++)
@@ -18,20 +18,32 @@ vector<int> generan_testset(int testscale)
 
 vector<int> select_sort(vector<int> testset)
 {
-    for(int i=0;i<size(testset)-1;i++)
+    for(int i=0;i<size(testset);i++)
     {
-        int min=testset[i];
+        int minindex=i;
         for(int j=i+1;j<size(testset);j++)
         {
-            if(testset[i+1]>min)
+            if(testset[j]<testset[minindex])
             {
-                min=testset[j];
+                minindex=j;
             }
         }
 
-        testset[i]=testset[i]^min;
-        min=testset[i]^min;
-        testset[i]=testset[i]^min;
+        if(minindex!=i)
+        {
+            /*int tmp=testset[i];
+            testset[i]=testset[minindex];
+            testset[minindex]=tmp;*/
+
+            testset[i]=testset[i]^testset[minindex];
+            testset[minindex]=testset[i]^testset[minindex];
+            testset[i]=testset[i]^testset[minindex];
+
+            /*testset[i]=testset[i]+testset[minindex];
+            testset[minindex]=testset[i]-testset[minindex];
+            testset[i]=testset[i]-testset[minindex];*/
+        }
+        
     }
 
     return testset;
@@ -58,9 +70,12 @@ bool compare(vector<int> resultest,vector<int> resultcheck)
 
 int main(void)
 {
-    long long int testscale,testtimes; cin >> testscale >> testtimes;
+    long long int testscale,testtimes; 
+    cout << "testscale:";cin >> testscale;
+    cout << "testtimes:";cin >> testtimes;
+    cout << endl;
 
-    for(int i=0;i<testtimes;i++)
+    for(int i=1;i<=testtimes;i++)
     {
         vector<int> testset=generan_testset(testscale);
         vector<int> resultest=select_sort(testset);
@@ -70,13 +85,26 @@ int main(void)
         if(!correctornot)
         {
             cout << "Somthing wrong!" << endl;
-
+            for(int output:testset)
+            {
+                cout << output << ' ';
+            }
+            cout << endl;
+            for(int output:resultest)
+            {
+                cout << output << ' ';
+            }
+            cout << endl;
+            for(int output:resultcheck)
+            {
+                cout << output << ' ';
+            }
+            cout << endl;
         }
         
-
         if(i%1000==0)
         {
-            cout << i << "test completed." << endl;
+            cout <<"\r" << i << "test completed." << flush;
         }
 
 
